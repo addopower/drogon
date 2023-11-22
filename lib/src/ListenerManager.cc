@@ -59,7 +59,8 @@ void ListenerManager::addListener(
     const std::string &certFile,
     const std::string &keyFile,
     bool useOldTLS,
-    const std::vector<std::pair<std::string, std::string>> &sslConfCmds)
+    const std::vector<std::pair<std::string, std::string>> &sslConfCmds,
+    const std::string &caFile)
 {
 #ifndef OpenSSL_FOUND
     if (useSSL)
@@ -68,7 +69,7 @@ void ListenerManager::addListener(
     }
 #endif
     listeners_.emplace_back(
-        ip, port, useSSL, certFile, keyFile, useOldTLS, sslConfCmds);
+        ip, port, useSSL, certFile, keyFile, useOldTLS, sslConfCmds, caFile);
 }
 
 std::vector<trantor::EventLoop *> ListenerManager::createListeners(
@@ -143,6 +144,7 @@ std::vector<trantor::EventLoop *> ListenerManager::createListeners(
 #ifdef OpenSSL_FOUND
                 auto cert = listener.certFile_;
                 auto key = listener.keyFile_;
+                auto caPath = listener.caFile_;
                 if (cert == "")
                     cert = globalCertFile;
                 if (key == "")
@@ -158,7 +160,7 @@ std::vector<trantor::EventLoop *> ListenerManager::createListeners(
                 std::copy(listener.sslConfCmds_.begin(),
                           listener.sslConfCmds_.end(),
                           std::back_inserter(cmds));
-                serverPtr->enableSSL(cert, key, listener.useOldTLS_, cmds);
+                serverPtr->enableSSL(cert, key, listener.useOldTLS_, cmds, caPath);
 #endif
             }
             serverPtr->setHttpAsyncCallback(httpCallback);
@@ -208,7 +210,7 @@ std::vector<trantor::EventLoop *> ListenerManager::createListeners(
                 std::copy(listener.sslConfCmds_.begin(),
                           listener.sslConfCmds_.end(),
                           std::back_inserter(cmds));
-                serverPtr->enableSSL(cert, key, listener.useOldTLS_, cmds);
+                serverPtr->enableSSL(cert, key, listener.useOldTLS_, cmds, caPath);
 #endif
             }
             serverPtr->setIoLoopThreadPool(ioLoopThreadPoolPtr_);

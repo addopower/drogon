@@ -712,7 +712,8 @@ class DROGON_EXPORT HttpAppFramework : public trantor::NonCopyable
         const std::string &keyFile = "",
         bool useOldTLS = false,
         const std::vector<std::pair<std::string, std::string>> &sslConfCmds =
-            {}) = 0;
+            {},
+        const std::string &caFile = "") = 0;
 
     /// Enable sessions supporting.
     /**
