@@ -61,9 +61,10 @@ DbClientImpl::DbClientImpl(const std::string &connInfo,
 #endif
       loops_(type == ClientType::Sqlite3
                  ? 1
-                 : (connNum < std::thread::hardware_concurrency()
+                 : /*(connNum < std::thread::hardware_concurrency()
                         ? connNum
-                        : std::thread::hardware_concurrency()),
+                        : std::thread::hardware_concurrency())*/connNum
+                        ,
              "DbLoop")
 {
     type_ = type;

@@ -26,6 +26,7 @@ namespace drogon
 {
 namespace orm
 {
+
 class MysqlResultImpl : public ResultImpl
 {
   public:

@@ -32,7 +32,21 @@ class DbClientManager : public trantor::NonCopyable
     void createDbClients(const std::vector<trantor::EventLoop *> &ioloops);
     DbClientPtr getDbClient(const std::string &name)
     {
+        if(dbClientsMap_.find(name) == dbClientsMap_.end())
+        {
+          for(auto & db:dbClientsMap_)
+            fprintf(stderr, "DbClientManager::getDbClient trovato: %s\n", db.first.c_str());
+          fprintf(stderr, "DbClientManager::getDbClient non trovato: %s\n", name.c_str());
+        }
         assert(dbClientsMap_.find(name) != dbClientsMap_.end());
+        return dbClientsMap_[name];
+    }
+    DbClientPtr getDbClientNullable(const std::string &name)
+    {
+        if(dbClientsMap_.find(name) == dbClientsMap_.end())
+        {
+          return nullptr;
+        }
         return dbClientsMap_[name];
     }
     ~DbClientManager();

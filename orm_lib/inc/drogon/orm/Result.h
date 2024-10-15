@@ -54,6 +54,8 @@ enum class SqlStatus
  * which are relatively small and cheap to copy.  Think of a result object as
  * a "smart pointer" to an underlying result set.
  */
+
+
 class DROGON_EXPORT Result
 {
   public:

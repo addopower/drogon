@@ -952,6 +952,11 @@ orm::DbClientPtr HttpAppFrameworkImpl::getDbClient(const std::string &name)
 {
     return dbClientManagerPtr_->getDbClient(name);
 }
+
+orm::DbClientPtr HttpAppFrameworkImpl::getDbClientNullable(const std::string &name)
+{
+    return dbClientManagerPtr_->getDbClientNullable(name);
+}
 orm::DbClientPtr HttpAppFrameworkImpl::getFastDbClient(const std::string &name)
 {
     return dbClientManagerPtr_->getFastDbClient(name);

@@ -110,6 +110,7 @@ class DROGON_EXPORT HttpClient : public trantor::NonCopyable
     virtual void sendRequest(const HttpRequestPtr &req,
                              HttpReqCallback &&callback,
                              double timeout = 0) = 0;
+    virtual time_t getScadenzaCertificato() const = 0;
 
     /**
      * @brief Send a request synchronously to the server and return the

@@ -120,6 +120,9 @@ ConstReverseResultIterator ConstReverseResultIterator::operator--(int)
 
 Result::SizeType Result::size() const noexcept
 {
+    if(!resultPtr_){
+        return 0;
+    }
     return resultPtr_->size();
 }
 
@@ -130,48 +133,75 @@ void Result::swap(Result &other) noexcept
 
 Result::RowSizeType Result::columns() const noexcept
 {
+    if(!resultPtr_){
+        return 0;
+    }
     return resultPtr_->columns();
 }
 
 const char *Result::columnName(Result::RowSizeType number) const
 {
+    if(!resultPtr_){
+        return "";
+    }
     return resultPtr_->columnName(number);
 }
 
 Result::SizeType Result::affectedRows() const noexcept
 {
+    if(!resultPtr_){
+        return 0;
+    }
     return resultPtr_->affectedRows();
 }
 
 Result::RowSizeType Result::columnNumber(const char colName[]) const
 {
+    if(!resultPtr_){
+        return 0;
+    }
     return resultPtr_->columnNumber(colName);
 }
 
 const char *Result::getValue(Result::SizeType row,
                              Result::RowSizeType column) const
 {
+    if(!resultPtr_){
+        return "";
+    }
     return resultPtr_->getValue(row, column);
 }
 
 bool Result::isNull(Result::SizeType row, Result::RowSizeType column) const
 {
+    if(!resultPtr_){
+        return true;
+    }
     return resultPtr_->isNull(row, column);
 }
 
 Result::FieldSizeType Result::getLength(Result::SizeType row,
                                         Result::RowSizeType column) const
 {
+    if(!resultPtr_){
+        return 0;
+    }
     return resultPtr_->getLength(row, column);
 }
 
 unsigned long long Result::insertId() const noexcept
 {
+    if(!resultPtr_){
+        return 0;
+    }
     return resultPtr_->insertId();
 }
 
 int Result::oid(RowSizeType column) const noexcept
 {
+    if(!resultPtr_){
+        return 0;
+    }
     return resultPtr_->oid(column);
 }
 

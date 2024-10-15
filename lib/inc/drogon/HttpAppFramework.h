@@ -1193,6 +1193,8 @@ class DROGON_EXPORT HttpAppFramework : public trantor::NonCopyable
      */
     virtual orm::DbClientPtr getDbClient(
         const std::string &name = "default") = 0;
+    virtual orm::DbClientPtr getDbClientNullable(
+        const std::string &name = "default") = 0;
 
     /// Get a 'fast' database client by name
     /**

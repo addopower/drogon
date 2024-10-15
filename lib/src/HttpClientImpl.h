@@ -104,6 +104,12 @@ class HttpClientImpl final : public HttpClient,
     void setCertPath(const std::string &cert, const std::string &key) override;
     void addSSLConfigs(const std::vector<std::pair<std::string, std::string>>
                            &sslConfCmds) override;
+    time_t getScadenzaCertificato() const override
+    {
+        if(!tcpClientPtr_ || !tcpClientPtr_->connection())
+            return 0;
+        return tcpClientPtr_->connection()->getScadenzaCertificato();
+    }
 
   private:
     std::shared_ptr<trantor::TcpClient> tcpClientPtr_;

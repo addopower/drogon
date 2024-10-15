@@ -472,6 +472,7 @@ class HttpAppFrameworkImpl final : public HttpAppFramework
     }
 
     orm::DbClientPtr getDbClient(const std::string &name) override;
+    orm::DbClientPtr getDbClientNullable(const std::string &name) override;
     orm::DbClientPtr getFastDbClient(const std::string &name) override;
     HttpAppFramework &createDbClient(const std::string &dbType,
                                      const std::string &host,
