@@ -426,9 +426,12 @@ if (BUILD_SQLITE)
     endif (DROGON_FOUND_SQLite3)
 endif (BUILD_SQLITE)
 
+message("REDIS?")
 if (BUILD_REDIS)
+    message("BUILDA_REDIS")
     find_package(Hiredis)
     if (Hiredis_FOUND)
+        message("TROVATO_REDIS")
         add_definitions(-DUSE_REDIS)
         target_link_libraries(${PROJECT_NAME} PRIVATE Hiredis_lib)
         set(DROGON_SOURCES
@@ -449,7 +452,8 @@ if (BUILD_REDIS)
             nosql_lib/redis/src/RedisTransactionImpl.h
             nosql_lib/redis/src/SubscribeContext.h
             nosql_lib/redis/src/RedisSubscriberImpl.h)
-
+    else()
+        message("TROVATO_REDIS")
     endif (Hiredis_FOUND)
 endif (BUILD_REDIS)
 
